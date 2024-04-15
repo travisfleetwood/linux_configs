@@ -1,6 +1,13 @@
 # ~/.bashrc
+#======================================================================================
+#                               Arch Linux Bash Configuration
+# Date    : 04/20/2024
+# Author  : Travis Stevens	travis@cloudnexus.pro
+# Version : v1
+# License : Distributed under the terms of GNU GPL version 2 or later
+#======================================================================================
 
-# This script is also a bash configuration file that is executed by the bash shell when it starts up,
+# This script is a bash configuration file that is executed by the bash shell when it starts up,
 # and is specifically for non-login shells. 
 # The script is intended to configure various settings and environment variables for the shell,
 # such as the command history, the editor, and the prompt.
@@ -139,15 +146,7 @@ alias ll='lsd -alh'
 alias l='ls'
 alias l.="ls -A | egrep '^\.'"
 
-# Fix obvious typo's.
-alias cd..='cd ..'
-alias pdw="pwd"
-alias udpate='sudo pacman -Syyu'
-alias upate='sudo pacman -Syyu'
-alias updte='sudo pacman -Syyu'
-alias updqte='sudo pacman -Syyu'
-alias upqll="paru -Syu --noconfirm"
-alias upal="paru -Syu --noconfirm"
+
 
 # Colorize the grep command output for ease of use (good for log files).
 alias grep='grep --color=auto'
@@ -342,15 +341,3 @@ alias rmgitcache="rm -r ~/.cache/git"
 # Alias to move your personal files and folders from /personal to ~.
 alias personal='cp -Rf /personal/* ~'
 
-# Lock KDE Plasma "edit" option for the desktop.
-alias lw="qdbus org.kde.plasmashell /PlasmaShell evaluateScript 'lockCorona(!locked)'"
-
-# Alias for favorite cryptocurrencies output via the coinbash script.
-alias coinbash-fav="./11_coinbash.sh -l btc,eth,bnb,xrp,ada,matic,sol,avax,mina,bat,lbry"
-
-# Create an alias config which we will use instead of the regular git,
-# for when we want to interact with our configuration repository.
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME' 
-
-# Alias for git bare repo .cfg push command that uses secure ssh.
-alias bump="config push git@github.com:travisfleetwood/.cfg.git"
