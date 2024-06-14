@@ -1,0 +1,98 @@
+# ~/.bashrc
+
+# This script is also a bash configuration file that is executed by the bash shell when it starts up, specifically for non-login shells.
+# The script is intended to configure various settings and environment variables for the shell, such as the command history, the editor, and the prompt.
+
+####################################################
+### SHELL CONFIGURATION & ENVIRONTMENT VARIABLES ###
+####################################################
+
+# The following line of code checks if the shell is running interactively, and if it's not, it won't do anything.
+[[ $- != *i* ]] && return
+
+# Don't put duplicate lines or lines starting with space in the history.
+export HISTCONTROL=ignoreboth
+
+# Set the history size and file size
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# Append to the history file instead of overwriting it
+shopt -s histappend
+
+# Automatically update the LINES and COLUMNS variables
+# based on the terminal window size
+shopt -s checkwinsize
+
+# Lesspipe is a program that is used to make 'less' command more friendly for non-text input files.
+command -v lesspipe > /dev/null && eval "$(SHELL=/bin/sh lesspipe)"
+
+###########
+### PS1 ###
+###########
+
+# If the terminal type is xterm or rxvt, set the title to display the current user, host, and working directory.
+# This makes it easier to identify the current session when multiple terminal windows are open.
+case "$TERM" in
+xterm*|rxvt*)
+
+# Color variables.
+PURPLE="\033[0;35m"  # timestamp color
+CYAN="\033[0;36m"    # username color
+ORANGE="\033[0;31m"  # hostname color
+GREY="\033[0;90m"    # separator color
+YELLOW="\033[0;33m"  # working directory color
+GREEN="\033[0;32m"   # success indicator color
+RED="\033[0;91m"     # error indicator color
+RESET="\033[0m"      # reset color
+
+# Change color of the prompt when last command exits with non-zero status.
+trap 'MY_PS1="[$RED]$MY_PS1"' ERR
+
+# Active PS1
+MY_PS1="[$PURPLE]@"
+MY_PS1+="[$GREY]-"
+MY_PS1+="[$CYAN]\u"
+MY_PS1+="[$GREY]@"
+MY_PS1+="[$ORANGE]\h"
+MY_PS1+="[$GREY]:"
+MY_PS1+="[$YELLOW]\w"
+MY_PS1+="[$GREEN]$"
+MY_PS1+="[$RESET] "
+    ;;
+*)
+    ;;
+esac
+
+
+###############
+### ALIASES ###
+###############
+
+# Enable color support of ls and also add handy aliases.
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    alias ll='ls -alF --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# Colored GCC warnings and errors.
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# Reboot & shutdown aliases.
+alias sr='sudo reboot'
+alias ssn='sudo shutdown now'
+
+# Enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
