@@ -1,8 +1,8 @@
 # ~/.bashrc
 #======================================================================================
 #                               Arch Linux Bash Configuration
-# Date    : 04/20/2024
-# Author  : Travis Fleetwood	travis@cloudnexus.pro
+# Date    : 06/15/2024
+# Author  : Travis Fleetwood
 # Version : v1
 # License : Distributed under the terms of GNU GPL version 2 or later
 #======================================================================================
@@ -261,7 +261,7 @@ alias ytv-best="yt-dlp -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+besta
 alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
 alias riplong="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -3000 | nl"
 
-# Iso and version used to install ArcoLinux.
+# Iso and version used to install distro.
 alias iso="cat /etc/dev-rel | awk -F '=' '/ISO/ {print $2}'"
 
 # Cleanup orphaned packages with pacman.
@@ -330,10 +330,6 @@ alias bls="betterlockscreen -u /usr/share/backgrounds/arcolinux/"
 
 # Give the list of all installed desktops - xsessions desktops.
 alias xd="ls /usr/share/xsessions"
-
-# Arcolinux applications aliases.
-alias att="arcolinux-tweak-tool"
-alias abl="arcolinux-betterlockscreen"
 
 # Remove the git cache alias.
 alias rmgitcache="rm -r ~/.cache/git"
